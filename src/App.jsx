@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Login from './Components/Auth/Login';
-import Authconext from './Context/Authcontext';
 import EmployeDashboard from './Components/Dashboard/EmployeDashboard';
 import AdminDashboard from './Components/Dashboard/AdminDashboard';
-
+import { AuthContext } from './Context/AuthProvider';
 const App = () => {
 
   const [User, setUser] = useState(null);
@@ -19,11 +18,13 @@ const App = () => {
       alert('Invalid Email or Password');
     }
   }
-  // handleLogin('admin@me.com', '123456');
+ const data =useContext(AuthContext);
+ console.log(data);
   return (
     <>
       {!User ? <Login handleLogin={handleLogin} /> : ''}
-      {User == 'admin' ? <AdminDashboard /> : <EmployeDashboard />}
+      {User === 'admin' ? <AdminDashboard /> : ''}
+      {User === 'employe' ? <EmployeDashboard /> : ''}
     </>
   );
 };
