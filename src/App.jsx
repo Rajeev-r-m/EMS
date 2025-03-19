@@ -7,13 +7,13 @@ const App = () => {
 
   const [User, setUser] = useState(null);
   const authData = useContext(AuthContext);
-  console.log(authData.employees);
+  // console.log(authData?.employees);
 
   const handleLogin = (email, password) => {
-    if (email == 'admin@me.com' && password == '123456') {
+    if (authData?.admin?.find((e) => e.email === email && e.password === password)) {
       setUser('admin');
     }
-    else if (authData &&  authData.employees.find((e) => e.email == email && e.password == password)) {
+    else if (authData?.employees?.find((e) => e.email === email && e.password === password)) {
       setUser('employe');
     }
     else {
